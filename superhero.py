@@ -16,11 +16,6 @@ with urllib.request.urlopen(req) as response:
     for thing in garb:
         if "\n" in thing:
             index=thing.split("\n")
-            
-            good.append(index[0])
-    print(good)
-            
 
-            
-        
-        
+            good.append(index[0])
+    print("good")
