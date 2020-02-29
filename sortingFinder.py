@@ -14,7 +14,6 @@ class myFinderHandler(FileSystemEventHandler):
                     new_destination += folder_destination + "/Screenshots/"+file_name
                 elif type == ".pdf":
                     new_destination += folder_destination+ "/PDF/" + file_name
-                print(new_destination,"new_destination")
                 os.rename(src, new_destination)
             else:
                 continue
@@ -22,7 +21,7 @@ class myFinderHandler(FileSystemEventHandler):
 
 
 folder_to_track = "/Users/ajaybati/Desktop"
-folder_destination = "/Users/ajaybati/Desktop
+folder_destination = "/Users/ajaybati/Desktop"
 
 
 event_handler = myFinderHandler()

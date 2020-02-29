@@ -16,7 +16,7 @@ class InstaBot:
         self.driver.find_element_by_xpath('//button[@type="submit"]').click()
         try:
 
-            for x in range(1):
+            for x in range(2000):
                 self.driver.find_element_by_xpath('//a[@title="Send a Like"]').click()
                 sleep(0.1)
         except Exception as e:
