@@ -21,7 +21,7 @@ class myFinderHandler(FileSystemEventHandler):
 
 
 folder_to_track = "/Users/ajaybati/Desktop"
-folder_destination = "/Users/ajaybati/Desktop"
+folder_destination = "/Users/ajaybati/Desktop
 
 
 event_handler = myFinderHandler()
