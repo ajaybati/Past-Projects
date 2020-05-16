@@ -105,7 +105,7 @@ def graphProvinces():
 
         plt.show()
 
-def graphTotal():
+def graphTotal(show = False):
     data_dict = {}
     plot_df= train[(train["Country_Region"]=="Afghanistan")]
     plot_df=plot_df["Date"]
@@ -130,44 +130,48 @@ def graphTotal():
     X = xData
 
     y = list(data_dict.values())
-    plt.plot(xData, list(data_dict.values()))
+    # plt.plot(xData, list(data_dict.values()))
 
 
     # #############################################################################
     # Fit regression model
-    svr_rbf = SVR(kernel='rbf', C=100, gamma=0.1, epsilon=.1)
+    svr_rbf = SVR(kernel='rbf', C=100, gamma=0.001, epsilon=.1)
     svr_lin = SVR(kernel='linear', C=100, gamma='auto')
-    svr_poly = SVR(kernel='poly', C=100, gamma='auto', degree=3, epsilon=.1,
+    svr_poly = SVR(kernel='poly', C=100, gamma='auto',degree=3, epsilon=.1,
                    coef0=1)
+    print()
 
-    # #############################################################################
-    # Look at the results
     lw = 2
 
     svrs = [svr_lin]
     kernel_label = ['Linear']
     model_color = ['g']
     print("starting to fit now")
-    # fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 10), sharey=True)
-    # for 0, svr in enumerate(svrs):
-    print( svr_poly.fit(X, y).predict([[76],[77],[78]]))
-    plt.plot(X, svr_poly.fit(X, y).predict(X), color=model_color[0], lw=lw,
-                  label='{} model'.format(kernel_label[0]))
-    # plt.scatter(X[svr_poly.support_], y[svr_poly.support_], facecolor="none",
-    #                  edgecolor=model_color[0], s=50,
-    #                  label='{} support vectors'.format(kernel_label[0]))
-    # plt.scatter(X[np.setdiff1d(np.arange(len(X)), svr_poly.support_)],
-    #                  y[np.setdiff1d(np.arange(len(X)), svr_poly.support_)],
-    #                  facecolor="none", edgecolor="k", s=50,
-    #                  label='other training data')
+    if show:
+        fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 10), sharey=True)
+        # for 0, svr in enumerate(svrs):
+    theX = []
+    for x in range(20):
+        theX.append([x+76])
+    prediction = svr_poly.fit(X,y).predict(theX)
+    print(prediction, len(prediction))
+    plt.plot(theX, list(prediction))
     plt.show()
-
-    # fig.text(0.5, 0.04, 'data', ha='center', va='center')
-    # fig.text(0.06, 0.5, 'target', ha='center', va='center', rotation='vertical')
-    # fig.suptitle("Support Vector Regression", fontsize=14)
-
-
-
+    # plt.plot(X, svr_rbf.fit(X, y).predict(theX), color=model_color[0], lw=lw,
+    #               label='{} model'.format(kernel_label[0]))
+    # if show:
+    #     plt.scatter(X[svr_poly.support_], y[svr_poly.support_], facecolor="none",
+    #                      edgecolor=model_color[0], s=50,
+    #                      label='{} support vectors'.format(kernel_label[0]))
+    #     plt.scatter(X[np.setdiff1d(np.arange(len(X)), svr_poly.support_)],
+    #                      y[np.setdiff1d(np.arange(len(X)), svr_poly.support_)],
+    #                      facecolor="none", edgecolor="k", s=50,
+    #                      label='other training data')
+    # plt.show()
+    # if show:
+    #     fig.text(0.5, 0.04, 'data', ha='center', va='center')
+    #     fig.text(0.06, 0.5, 'target', ha='center', va='center', rotation='vertical')
+    #     fig.suptitle("Support Vector Regression", fontsize=14)
 
 
 graphTotal()
